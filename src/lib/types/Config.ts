@@ -1,3 +1,1 @@
-export type Config = {
-  apiKey: string;
-};
+export type Config = string;
