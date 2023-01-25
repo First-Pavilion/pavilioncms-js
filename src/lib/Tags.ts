@@ -1,15 +1,12 @@
 import { Tag, TagList } from "./types/Tags";
-import { Client } from "src/client";
+import { ApiCall } from "./utils/Api";
 
+export class Tags extends ApiCall {
+  all(): Promise<TagList> {
+    return this.invoke<TagList>("/tag/all/");
+  }
 
-export class Tags extends Client {
-    all(): Promise<TagList> {
-        return this.invoke<TagList>("/tag/all/");
-    }
-
-    get(id: string): Promise<Tag> {
-        return this.invoke<Tag>(`/tag/${id}/view/`);
-    }
-
+  get(id: string): Promise<Tag> {
+    return this.invoke<Tag>(`/tag/${id}/view/`);
+  }
 }
-
