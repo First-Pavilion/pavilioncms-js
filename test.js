@@ -1,9 +1,8 @@
 const { PavilionCMS } = require("./dist");
 
-const client = new PavilionCMS({
-  apiKey:
-    "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5YTMzZDAxMTVlZTRiOGJiNjBiNGUxNmQ5YzdkMmRkYSIsInN1YiI6IjYzZDExNGJmZTcyZmU4MDA4NDkwYTc5NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Rv4lUaHboZi8dovX88VRSRiJvcJR8xYQL-ghLC1wEDg",
-});
+const client = new PavilionCMS(
+  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5YTMzZDAxMTVlZTRiOGJiNjBiNGUxNmQ5YzdkMmRkYSIsInN1YiI6IjYzZDExNGJmZTcyZmU4MDA4NDkwYTc5NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Rv4lUaHboZi8dovX88VRSRiJvcJR8xYQL-ghLC1wEDg"
+);
 
 client.tags
   .all()

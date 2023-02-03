@@ -6,7 +6,7 @@ export abstract class ApiCall {
   private apiKey: string;
 
   constructor(config: Config) {
-    this.apiKey = config.apiKey;
+    this.apiKey = config;
   }
 
   protected invoke<T>(endpoint: string, type?: string): Promise<T> {
