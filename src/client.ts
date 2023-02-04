@@ -1,11 +1,20 @@
 import { Tags } from "./lib/Tags";
-import { Config } from "./lib/types/Config";
+import { ReadToken } from "./lib/types/type";
+import { Categories } from "./lib/Category";
+import { Posts } from "./lib/Posts";
+import { Authors } from "./lib/Authors";
 
 abstract class Client {
   public tags: Tags;
+  public category: Categories;
+  public posts: Posts;
+  public authors: Authors;
 
-  constructor(config: Config) {
-    this.tags = new Tags(config);
+  constructor(readToken: ReadToken) {
+    this.tags = new Tags(readToken);
+    this.category = new Categories(readToken);
+    this.posts = new Posts(readToken);
+    this.authors = new Authors(readToken);
   }
 }
 

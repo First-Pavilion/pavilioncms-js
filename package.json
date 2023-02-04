@@ -13,10 +13,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "microbundle": "^0.15.1"
-  },
-  "dependencies": {
-    "axios": "^1.2.4",
-    "isomorphic-unfetch": "^4.0.2"
+    "microbundle": "^0.15.1",
+    "prettier": "2.8.3"
   }
 }

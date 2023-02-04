@@ -1,31 +1,60 @@
-import { Config } from "../types/Config";
-import axios from "axios";
+import { QueryParam, ReadToken } from "../types/type";
 
 export abstract class ApiCall {
   protected BASE_URL = "https://api.themoviedb.org/3";
-  private apiKey: string;
+  private ReadToken: string;
+  private headers: any;
 
-  constructor(config: Config) {
-    this.apiKey = config;
+  constructor(readToken: ReadToken) {
+    this.ReadToken = readToken;
+
+    this.headers = {
+      "Content-Type": "application/json;charset=utf-8",
+      Accept: "application/json",
+      "User-Agent": "pavilioncms-js-client",
+      "X-Pavilion-Client": "JS/1.0.0",
+      ReadToken: this.ReadToken,
+    };
   }
 
-  protected invoke<T>(endpoint: string, type?: string): Promise<T> {
-    const url = `${this.BASE_URL}${endpoint}`;
-    const headers = {
-      "Content-Type": "application/json;charset=utf-8",
-      Authorization: `Bearer ${this.apiKey}`,
+  protected getData<T>(endpoint: string, queryObject?: QueryParam): Promise<T> {
+    let url = `${this.BASE_URL}${endpoint}`;
+    const options = {
+      method: "GET",
+      headers: this.headers,
     };
 
-    return axios({
-      url,
-      method: type || "GET",
-      headers,
-    })
-      .then((response) => {
-        return response.data;
-      })
-      .catch((error) => {
-        throw new Error(error);
-      });
+    if (queryObject) {
+      let queryString = "?";
+      for (const key in queryObject) {
+        if (queryObject.hasOwnProperty(key)) {
+          const value = encodeURIComponent(queryObject[String(key)]);
+          queryString += `${key}=${value}&`;
+        }
+      }
+      queryString.replace(/&$/, "");
+      url += queryString;
+    }
+    return this.invoke<T>(url, options);
+  }
+
+  protected getPage<T>(url: string): Promise<T> {
+    const options = {
+      method: "GET",
+      headers: this.headers,
+    };
+    return this.invoke<T>(url, options);
+  }
+
+  protected invoke<T>(url: string, options, type?: string) {
+    return fetch(url, options).then((response) => {
+      if (!response.ok) {
+        return Promise.reject(
+          response.json()?.detail ||
+            "An error occurred. Please try again later."
+        );
+      }
+      return response.json();
+    });
   }
 }
