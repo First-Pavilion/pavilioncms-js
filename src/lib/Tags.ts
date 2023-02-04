@@ -1,12 +1,20 @@
-import { Tag, TagList } from "./types/Tags";
+import { QueryParam, Tag, TagList } from "./types/type";
 import { ApiCall } from "./utils/Api";
 
 export class Tags extends ApiCall {
-  all(): Promise<TagList> {
-    return this.invoke<TagList>("/tag/all/");
+  all(params: QueryParam = {}): Promise<TagList> {
+    return this.getData<TagList>("/tag/all/", params);
   }
 
   get(id: string): Promise<Tag> {
-    return this.invoke<Tag>(`/tag/${id}/view/`);
+    return this.getData<Tag>(`/tag/${id}/view/`);
+  }
+
+  next(url: string): Promise<TagList> {
+    return this.getPage<TagList>(url);
+  }
+
+  previous(url: string): Promise<TagList> {
+    return this.getPage<TagList>(url);
   }
 }
