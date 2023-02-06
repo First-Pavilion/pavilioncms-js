@@ -1,7 +1,7 @@
 import { QueryParam, ReadToken } from "../types/type";
 
 export abstract class ApiCall {
-  protected BASE_URL = "https://api.themoviedb.org/3";
+  protected BASE_URL = "https://api.v1.pavilioncms.com";
   private ReadToken: string;
   private headers: any;
 
