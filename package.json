@@ -1,6 +1,6 @@
 {
-  "name": "pavilion_cms",
-  "version": "1.0.0b",
+  "name": "pavilioncms-js",
+  "version": "1.0.0",
   "description": "Pavilion CMS JS Library",
   "main": "dist/index.js",
   "module": "dist/index.m.js",
